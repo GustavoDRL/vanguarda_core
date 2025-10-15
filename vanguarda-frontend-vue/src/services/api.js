@@ -1,0 +1,12 @@
+import axios from 'axios'
+
+// Configuração base do Axios
+const api = axios.create({
+  baseURL: '/api/v1',
+  timeout: 30000,
+  headers: {
+    'Content-Type': 'application/json'
+  }
+})
+
+export default api
