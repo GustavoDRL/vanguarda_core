@@ -36,10 +36,6 @@
             <span class="info-label">Cotas Disponíveis:</span>
             <strong class="text-success">{{ grupoDetalhes.gru_num_cotas_disponiveis || 0 }}</strong>
           </div>
-          <div class="info-item">
-            <span class="info-label">Já Contemplados:</span>
-            <strong>{{ grupoDetalhes.gru_num_contemplados || 0 }}</strong>
-          </div>
           <div v-if="grupoDetalhes.gru_data_assembleia" class="info-item">
             <span class="info-label">Próxima Assembleia:</span>
             <strong>{{ formatarData(grupoDetalhes.gru_data_assembleia) }}</strong>
@@ -77,8 +73,17 @@
               :step="stepValorCredito"
             />
             <div class="slider-limits">
-              <span>{{ formatarDinheiro(minValorCredito) }}</span>
-              <span>{{ formatarDinheiro(maxValorCredito) }}</span>
+              <span>{{ formatarDinheiro(minValorCredito) }} (1 cota)</span>
+              <span>{{ formatarDinheiro(maxValorCredito) }} ({{ Math.floor(maxValorCredito / minValorCredito) }} cotas)</span>
+            </div>
+
+            <!-- Indicador de Múltiplos de Cotas -->
+            <div v-if="indicadorCotas" class="indicador-cotas">
+              <span class="cotas-badge">
+                <strong>{{ indicadorCotas.quantidade }}</strong>
+                {{ indicadorCotas.quantidade === 1 ? 'cota' : 'cotas' }}
+              </span>
+              <span class="cotas-detalhes">{{ indicadorCotas.combinacao }}</span>
             </div>
           </div>
 
@@ -283,15 +288,31 @@ const comparacoes = ref([])
 const carregandoComparacao = ref(false)
 
 // Limites dos sliders
-const minValorCredito = 10000
-const maxValorCredito = 200000
-const stepValorCredito = 1000
 const minPrazo = 24
 const maxPrazo = 120
 
+// Limites dinâmicos baseados na cota
+const valorBaseCota = computed(() => {
+  // Se há um bem selecionado, usa o valor dele como base da cota
+  if (bemSelecionado.value) {
+    return parseFloat(bemSelecionado.value.bem_credito)
+  }
+  // Se não há bem selecionado mas há bens disponíveis, usa o menor valor
+  if (bensDoGrupo.value.length > 0) {
+    const valores = bensDoGrupo.value.map(b => parseFloat(b.bem_credito))
+    return Math.min(...valores)
+  }
+  // Fallback para valor padrão
+  return 10000
+})
+
+const minValorCredito = computed(() => valorBaseCota.value)
+const maxValorCredito = computed(() => valorBaseCota.value * 10) // Até 10 cotas
+const stepValorCredito = computed(() => valorBaseCota.value) // Step = 1 cota
+
 // Formulário
 const form = ref({
-  valorCredito: 50000,
+  valorCredito: 10000, // Será ajustado quando o grupo for carregado
   prazoMeses: 60,
   percentualLance: 0
 })
@@ -311,6 +332,29 @@ const lanceMensal = computed(() => {
 const lanceMaxPermitido = computed(() => {
   if (!resultado.value || !resultado.value.percentual_lance_max) return 50
   return Math.floor(parseFloat(resultado.value.percentual_lance_max) * 100)
+})
+
+const indicadorCotas = computed(() => {
+  if (!grupoSelecionado.value || !valorBaseCota.value) return null
+
+  // Calcula quantas cotas estão sendo usadas (sempre será um múltiplo exato)
+  const quantidade = Math.round(form.value.valorCredito / valorBaseCota.value)
+
+  // Como o slider move em múltiplos, todas as cotas têm o mesmo valor
+  const valorPorCota = valorBaseCota.value
+
+  // Monta a descrição da combinação
+  let combinacao = ''
+  if (quantidade === 1) {
+    combinacao = `${formatarDinheiro(valorPorCota)}`
+  } else {
+    combinacao = `${quantidade}x ${formatarDinheiro(valorPorCota)}`
+  }
+
+  return {
+    quantidade,
+    combinacao
+  }
 })
 
 // Debounce timer
@@ -351,6 +395,12 @@ async function onGrupoChange() {
     bensDoGrupo.value = grupoDetalhes.value.bens || []
     bemSelecionado.value = null
 
+    // Ajustar valor inicial para o valor base da cota
+    if (bensDoGrupo.value.length > 0) {
+      const menorValor = Math.min(...bensDoGrupo.value.map(b => parseFloat(b.bem_credito)))
+      form.value.valorCredito = menorValor
+    }
+
     // Simular com o grupo selecionado
     await simularAutomaticamente()
   } catch (error) {
@@ -360,7 +410,11 @@ async function onGrupoChange() {
 
 function onBemChange() {
   if (bemSelecionado.value) {
+    // Define o valor do crédito como o valor do bem selecionado (1 cota)
     form.value.valorCredito = parseFloat(bemSelecionado.value.bem_credito)
+  } else {
+    // Se voltou para "Valor personalizado", mantém no mínimo (1 cota)
+    form.value.valorCredito = valorBaseCota.value
   }
 }
 
@@ -573,6 +627,42 @@ function formatarData(dataStr) {
   margin-top: var(--spacing-xs);
   font-size: var(--font-size-sm);
   color: var(--color-text-secondary);
+}
+
+/* Indicador de Cotas */
+.indicador-cotas {
+  margin-top: var(--spacing-md);
+  padding: var(--spacing-md);
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+  border-radius: var(--radius);
+  border-left: 4px solid var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-md);
+}
+
+.cotas-badge {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-xs) var(--spacing-md);
+  background: var(--color-primary);
+  color: white;
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-sm);
+  white-space: nowrap;
+}
+
+.cotas-badge strong {
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+}
+
+.cotas-detalhes {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  font-weight: 500;
 }
 
 .comparador-section {
@@ -845,6 +935,16 @@ function formatarData(dataStr) {
 
   .selecao-grid {
     grid-template-columns: 1fr;
+  }
+
+  .indicador-cotas {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cotas-badge {
+    width: 100%;
+    justify-content: center;
   }
 }
 </style>
