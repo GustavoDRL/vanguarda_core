@@ -1,13 +1,30 @@
 <template>
-  <div class="container-full">
-    <h2 class="page-title">Simulação de Consórcio Completa</h2>
+  <div class="page-wrapper">
+    <!-- Hero Section - Conforme Branding Kit -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <h1 class="hero-title">Realize Seu Sonho</h1>
+        <p class="hero-subtitle">
+          Simule gratuitamente e descubra o melhor plano para você.
+          Maior índice de contemplações do Brasil.
+        </p>
+        <div class="hero-badges">
+          <span class="badge-trust">✅ Regulado pelo Banco Central</span>
+          <span class="badge-trust">#1 em Contemplações</span>
+          <span class="badge-trust">+200 mil veículos entregues</span>
+        </div>
+      </div>
+    </section>
 
-    <!-- Seleção de Grupo e Bem -->
-    <div class="card selecao-card">
+    <!-- Seção Branca Principal - Conforme Branding Kit -->
+    <section class="section-white">
+      <div class="container-full">
+        <!-- Seleção de Grupo e Bem -->
+        <div class="card selecao-card">
       <div class="card-body">
         <div class="selecao-grid">
           <div class="form-group">
-            <label class="form-label">Escolha o Grupo</label>
+            <label class="form-label">Escolha Seu Plano</label>
             <select v-model="grupoSelecionado" class="form-select" @change="onGrupoChange">
               <option v-for="grupo in grupos" :key="grupo.gru_id" :value="grupo">
                 Grupo {{ grupo.gru_id_siens }} - {{ grupo.gru_caracteristicas }}
@@ -16,9 +33,9 @@
           </div>
 
           <div v-if="bensDoGrupo.length > 0" class="form-group">
-            <label class="form-label">O que você deseja?</label>
+            <label class="form-label">Qual é o Seu Sonho?</label>
             <select v-model="bemSelecionado" class="form-select" @change="onBemChange">
-              <option :value="null">Valor personalizado</option>
+              <option :value="null">Escolher valor personalizado</option>
               <option v-for="bem in bensDoGrupo" :key="bem.bem_id" :value="bem">
                 {{ bem.bem_nome }} - {{ formatarDinheiro(bem.bem_credito) }}
               </option>
@@ -26,18 +43,18 @@
           </div>
         </div>
 
-        <!-- Informações do Grupo -->
+        <!-- Informações do Plano -->
         <div v-if="grupoDetalhes" class="info-grupo">
           <div class="info-item">
-            <span class="info-label">Categoria:</span>
+            <span class="info-label">Categoria</span>
             <strong>{{ grupoDetalhes.categoria_nome || 'Geral' }}</strong>
           </div>
           <div class="info-item">
-            <span class="info-label">Cotas Disponíveis:</span>
+            <span class="info-label">Vagas Disponíveis</span>
             <strong class="text-success">{{ grupoDetalhes.gru_num_cotas_disponiveis || 0 }}</strong>
           </div>
           <div v-if="grupoDetalhes.gru_data_assembleia" class="info-item">
-            <span class="info-label">Próxima Assembleia:</span>
+            <span class="info-label">Próximo Sorteio</span>
             <strong>{{ formatarData(grupoDetalhes.gru_data_assembleia) }}</strong>
           </div>
         </div>
@@ -48,7 +65,7 @@
       <!-- Painel de Controles -->
       <div class="card controles-panel">
         <div class="card-header">
-          <h3 class="card-title">Ajuste os Valores</h3>
+          <h3 class="card-title">Personalize Seu Plano</h3>
         </div>
 
         <div class="card-body">
@@ -110,7 +127,7 @@
           <!-- Percentual de Lance -->
           <div class="slider-group">
             <label class="slider-label">
-              <span>Lance (opcional)</span>
+              <span>Quer Ser Contemplado Mais Rápido?</span>
               <strong class="slider-value">{{ form.percentualLance }}%</strong>
             </label>
             <input
@@ -123,21 +140,21 @@
               :disabled="!resultado?.aceita_lance"
             />
             <div class="slider-limits">
-              <span>0%</span>
-              <span>{{ lanceMaxPermitido }}%</span>
+              <span>Sem lance</span>
+              <span>Lance de {{ lanceMaxPermitido }}%</span>
             </div>
             <span v-if="resultado?.aceita_lance" class="form-help">
-              Aumenta chances de contemplação
+              💡 Com lance você aumenta suas chances de contemplação e realiza seu sonho mais rápido
             </span>
             <span v-else class="form-help text-warning">
-              Este grupo não aceita lances
+              Este plano contempla apenas por sorteio mensal
             </span>
           </div>
 
           <!-- Comparador de Prazos -->
           <div class="comparador-section">
             <button @click="toggleComparador" class="btn btn-outline btn-block">
-              {{ mostrarComparador ? 'Ocultar' : 'Comparar' }} Outros Prazos
+              {{ mostrarComparador ? 'Fechar Comparação' : 'Comparar Planos e Economizar' }}
             </button>
           </div>
         </div>
@@ -146,7 +163,7 @@
       <!-- Painel de Resultados -->
       <div class="card resultados-panel">
         <div class="card-header">
-          <h3 class="card-title">Resultado da Simulação</h3>
+          <h3 class="card-title">Seu Plano Personalizado</h3>
           <LoadingSpinner v-if="carregando" />
         </div>
 
@@ -223,7 +240,7 @@
         </div>
 
         <div v-else class="card-body text-center">
-          <p class="text-secondary">Ajuste os valores para ver a simulação</p>
+          <p class="text-secondary">Personalize seu plano acima para ver como realizar seu sonho</p>
         </div>
       </div>
     </div>
@@ -232,7 +249,7 @@
     <div v-if="mostrarComparador" class="modal-overlay" @click="toggleComparador">
       <div class="modal-content" @click.stop>
         <div class="modal-header">
-          <h3>Comparação de Prazos</h3>
+          <h3>Compare e Escolha o Melhor Plano</h3>
           <button @click="toggleComparador" class="btn-close">×</button>
         </div>
         <div class="modal-body">
@@ -263,7 +280,9 @@
         </div>
       </div>
     </div>
-  </div>
+      </div><!-- /container-full -->
+    </section><!-- /section-white -->
+  </div><!-- /page-wrapper -->
 </template>
 
 <script setup>
@@ -495,19 +514,79 @@ function formatarData(dataStr) {
 </script>
 
 <style scoped>
+/* === HERO SECTION - CONFORME BRANDING KIT === */
+.page-wrapper {
+  background: var(--fundo-base); /* #2C3E50 - fundo escuro oficial */
+}
+
+.hero-section {
+  background: var(--verde-primario); /* #D1FF00 */
+  color: var(--cinza-escuro); /* #333333 - texto escuro no verde */
+  padding: 64px 24px; /* var(--spacing-xxl) var(--spacing-md) */
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-title {
+  font-size: 3.5rem; /* 56px - H1 do branding */
+  font-weight: 900; /* Black */
+  line-height: 1.2;
+  margin-bottom: 24px; /* var(--spacing-md) */
+  color: var(--cinza-escuro); /* #333 no verde */
+}
+
+.hero-subtitle {
+  font-size: 1.25rem; /* 20px - Body Large */
+  font-weight: 400;
+  line-height: 1.6;
+  margin-bottom: 32px; /* var(--spacing-lg) */
+  color: var(--cinza-escuro);
+  opacity: 0.95;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-badges {
+  display: flex;
+  justify-content: center;
+  gap: 16px; /* var(--spacing-sm) */
+  flex-wrap: wrap;
+}
+
+.badge-trust {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px; /* var(--spacing-xs) */
+  background: var(--cinza-escuro); /* Fundo escuro */
+  color: var(--branco); /* Texto branco */
+  padding: 8px 16px; /* var(--spacing-xs) var(--spacing-sm) */
+  border-radius: 9999px; /* var(--radius-full) */
+  font-weight: 600;
+  font-size: 0.875rem; /* 14px */
+  border: 2px solid #111111;  /* Borda escura ao invés de sombra */
+}
+
+/* === SEÇÃO BRANCA - CONFORME BRANDING KIT === */
+.section-white {
+  background: var(--branco); /* #FFFFFF */
+  color: var(--cinza-escuro); /* #333333 */
+  padding: 64px 24px; /* var(--spacing-xxl) var(--spacing-md) */
+  min-height: 100vh;
+}
+
 .container-full {
   max-width: 1400px;
   margin: 0 auto;
-  padding: var(--spacing-lg);
-}
-
-.page-title {
-  text-align: center;
-  margin-bottom: var(--spacing-xl);
-  color: var(--color-primary);
-  font-size: 2.5rem;  /* MUITO MAIOR */
-  font-weight: 900;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);  /* Sombra para destacar */
+  padding: 0; /* Sem padding extra, já tem no section */
 }
 
 /* Seleção de Grupo */
@@ -524,10 +603,10 @@ function formatarData(dataStr) {
 
 .form-select {
   width: 100%;
-  padding: 1rem 1.25rem;  /* MAIOR padding */
-  border: 2px solid #d0d0d0;  /* Borda GROSSA */
+  padding: 1rem;  /* 16px - Grid 8px */
+  border: 2px solid #d0d0d0;
   border-radius: var(--radius-md);
-  font-size: 1.125rem;  /* 18px */
+  font-size: 1.125rem;
   font-weight: 600;
   background: white;
   cursor: pointer;
@@ -537,11 +616,11 @@ function formatarData(dataStr) {
 .info-grupo {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: var(--spacing-lg);  /* MAIS espaço */
-  padding: var(--spacing-xl);  /* MAIS padding */
-  background: rgba(255, 255, 255, 0.08);  /* Fundo mais visível */
+  gap: var(--spacing-lg);
+  padding: var(--spacing-xl);
+  background: #F5F5F5;  /* Cinza muito claro - branding */
   border-radius: var(--radius-md);
-  border: 2px solid rgba(255, 255, 255, 0.1);  /* Borda para definição */
+  border: 2px solid #CCCCCC;  /* Borda mais escura para destaque */
 }
 
 .info-item {
@@ -549,16 +628,24 @@ function formatarData(dataStr) {
   flex-direction: column;
   gap: var(--spacing-sm);
   padding: var(--spacing-md);
-  background: rgba(255, 255, 255, 0.05);
+  background: #FFFFFF;  /* Branco puro - branding */
   border-radius: var(--radius);
+  border: 1px solid #CCCCCC;  /* Borda ao invés de sombra */
 }
 
 .info-label {
-  font-size: 1rem;  /* MAIOR */
-  font-weight: 600;  /* Mais peso */
-  color: #FFFFFF;  /* BRANCO PURO para contraste */
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  font-family: 'DM Sans', sans-serif; /* Fonte secundária do branding */
+  font-size: 1rem; /* 16px - Maior */
+  font-weight: 500;
+  color: var(--cinza); /* #666666 */
+  margin-bottom: 4px;
+  /* SEM text-transform - não está no branding */
+}
+
+.info-item strong {
+  font-size: 1.25rem; /* 20px - Maior */
+  font-weight: 700;
+  color: #2C3E50; /* Azul acinzentado */
 }
 
 .simulador-grid {
@@ -570,12 +657,15 @@ function formatarData(dataStr) {
 
 /* Painel de Controles */
 .controles-panel {
-  position: sticky;
-  top: var(--spacing-lg);
+  position: static;  /* Estático para não se mover */
 }
 
 .slider-group {
   margin-bottom: var(--spacing-xl);
+  padding: var(--spacing-lg);
+  background: #F9FAFB;  /* Fundo cinza muito claro */
+  border-radius: var(--radius-md);
+  border: 2px solid #E7E7E7;
 }
 
 .slider-label {
@@ -583,22 +673,27 @@ function formatarData(dataStr) {
   justify-content: space-between;
   align-items: center;
   margin-bottom: var(--spacing-md);
-  font-size: 1.25rem;  /* MAIOR */
-  font-weight: 600;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #333333;  /* Texto escuro */
+}
+
+.slider-label span {
+  color: #666666;  /* Label em cinza */
 }
 
 .slider-value {
-  color: var(--color-primary);
+  color: #2C3E50;  /* Azul acinzentado */
   font-size: 2rem;  /* MUITO MAIOR - 32px */
   font-weight: 900;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  /* Sem sombra - mais simples e legível */
 }
 
 .slider {
   width: 100%;
-  height: 12px;  /* MAIS GROSSO */
+  height: 6px;  /* Mais fino */
   border-radius: var(--radius-full);
-  background: rgba(255, 255, 255, 0.2);  /* Mais visível */
+  background: #000000;  /* Preto para máxima visibilidade */
   outline: none;
   -webkit-appearance: none;
 }
@@ -611,9 +706,8 @@ function formatarData(dataStr) {
   border-radius: 50%;
   background: var(--color-primary);
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);  /* Sombra maior */
   transition: var(--transition);
-  border: 3px solid #FFFFFF;  /* Borda branca para destaque */
+  border: 3px solid #333333;  /* Borda escura para destaque */
 }
 
 .slider::-webkit-slider-thumb:hover {
@@ -622,14 +716,13 @@ function formatarData(dataStr) {
 }
 
 .slider::-moz-range-thumb {
-  width: 24px;
-  height: 24px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   background: var(--color-primary);
   cursor: pointer;
-  box-shadow: var(--shadow);
   transition: var(--transition);
-  border: none;
+  border: 3px solid #333333;  /* Borda escura para destaque */
 }
 
 .slider:disabled {
@@ -640,10 +733,17 @@ function formatarData(dataStr) {
 .slider-limits {
   display: flex;
   justify-content: space-between;
-  margin-top: var(--spacing-md);
-  font-size: 1rem;  /* MAIOR */
-  font-weight: 600;
-  color: #FFFFFF;  /* BRANCO para visibilidade */
+  margin-top: 8px; /* var(--spacing-xs) - Grid 8px */
+  font-family: 'DM Sans', sans-serif; /* Fonte secundária */
+  font-size: 0.875rem; /* 14px - Body Small */
+  font-weight: 400;
+  color: var(--cinza); /* #666666 */
+}
+
+.form-help {
+  font-family: 'DM Sans', sans-serif; /* Fonte secundária para hints */
+  font-size: 0.875rem; /* 14px - Body Small */
+  font-weight: 400;
 }
 
 /* Indicador de Cotas */
@@ -663,14 +763,14 @@ function formatarData(dataStr) {
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
-  padding: 0.75rem 1.5rem;  /* MAIOR */
+  padding: 1rem 1.5rem;  /* 16px 24px - Grid 8px */
   background: var(--color-primary);  /* Verde Vanguarda */
   color: #1a1a1a;  /* TEXTO MUITO ESCURO no verde */
   border-radius: var(--radius-full);
   font-size: 1.125rem;  /* 18px */
   white-space: nowrap;
   font-weight: 700;
-  box-shadow: 0 4px 12px rgba(209, 255, 0, 0.4);
+  border: 2px solid #BDE70E;  /* Borda verde mais escura */
 }
 
 .cotas-badge strong {
@@ -679,8 +779,9 @@ function formatarData(dataStr) {
 }
 
 .cotas-detalhes {
-  font-size: 1.125rem;  /* MAIOR */
-  color: #FFFFFF;  /* BRANCO */
+  font-family: 'DM Sans', sans-serif; /* Fonte secundária para dados */
+  font-size: 1.125rem;
+  color: var(--color-text-dark);  /* Texto escuro - está em seção branca */
   font-weight: 600;
 }
 
@@ -691,6 +792,10 @@ function formatarData(dataStr) {
 }
 
 /* Painel de Resultados */
+.resultados-panel {
+  position: static;  /* Estático para não se mover */
+}
+
 .resultados-panel .card-header {
   display: flex;
   justify-content: space-between;
@@ -698,20 +803,22 @@ function formatarData(dataStr) {
 }
 
 .resultado-destaque {
-  background: var(--color-secondary);  /* Azul sólido para contraste correto */
-  color: white;  /* Branco funciona bem no azul */
+  background: #2C3E50;  /* Azul acinzentado - mesmo da parte externa */
+  color: white;  /* Branco para textos normais */
   padding: var(--spacing-xl);
   border-radius: var(--radius-lg);
   text-align: center;
   margin-bottom: var(--spacing-xl);
-  box-shadow: 0 8px 32px rgba(37, 117, 252, 0.3);
+  border: 3px solid #1a2633;  /* Borda ainda mais escura */
 }
 
 .resultado-label {
   display: block;
-  font-size: var(--font-size-sm);
-  opacity: 0.9;
+  font-family: 'DM Sans', sans-serif; /* Fonte secundária para labels */
+  font-size: 1.25rem;  /* 20px - Maior */
+  color: #FFFFFF;  /* Branco */
   margin-bottom: var(--spacing-xs);
+  font-weight: 600;
 }
 
 .resultado-valor-grande {
@@ -719,14 +826,17 @@ function formatarData(dataStr) {
   font-size: 4rem;  /* GIGANTE - 64px */
   font-weight: 900;
   margin-bottom: var(--spacing-sm);
-  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  color: #D1FF00;  /* Verde característico da marca */
+  /* Sem sombra - mais simples e legível */
   letter-spacing: -0.02em;
 }
 
 .resultado-info {
   display: block;
-  font-size: var(--font-size-sm);
-  opacity: 0.9;
+  font-family: 'DM Sans', sans-serif; /* Fonte secundária para info */
+  font-size: 1.125rem;  /* 18px - Maior */
+  color: #FFFFFF;  /* Branco */
+  font-weight: 500;
 }
 
 /* Métricas */
@@ -738,77 +848,108 @@ function formatarData(dataStr) {
 }
 
 .metrica-card {
-  background: rgba(255, 255, 255, 0.08);
-  padding: var(--spacing-xl);  /* MAIS padding */
+  background: #FFFFFF;  /* Branco puro para máximo contraste */
+  padding: var(--spacing-xl);
   border-radius: var(--radius-md);
   text-align: center;
-  border: 2px solid rgba(255, 255, 255, 0.1);  /* Borda para definição */
+  border: 3px solid #2C3E50;  /* Borda azul acinzentado */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .metrica-card.highlight {
-  background: rgba(209, 255, 0, 0.1);  /* Verde Vanguarda com transparência */
-  border: 2px solid var(--color-primary);  /* Borda verde */
+  background: #FFFEF0;  /* Amarelo muito claro */
+  border: 3px solid #BDE70E;  /* Borda verde brilhante */
+}
+
+.metrica-card.highlight .metrica-valor {
+  color: #7ED500;  /* Verde escuro para destaque */
 }
 
 .metrica-label {
   display: block;
-  font-size: 1rem;  /* MAIOR */
-  color: #FFFFFF;  /* BRANCO */
-  margin-bottom: var(--spacing-sm);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  font-family: 'DM Sans', sans-serif; /* Fonte secundária */
+  font-size: 0.875rem; /* 14px - Body Small */
+  color: var(--cinza); /* #666666 */
+  margin-bottom: 8px; /* var(--spacing-xs) */
+  font-weight: 500;
+  text-align: center;  /* Centralizado */
+  width: 100%;
+  /* SEM text-transform */
 }
 
 .metrica-valor {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 2rem;  /* MUITO MAIOR - 32px */
-  color: var(--color-primary);
+  color: #2C3E50;  /* Azul acinzentado */
   font-weight: 900;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  text-align: center !important;  /* Centralizado - forçado */
+  width: 100%;  /* Largura total para garantir centralização */
+  margin: 0 auto;  /* Centralização adicional */
+  padding: 0;
+  /* Sem sombra - mais simples e legível */
 }
 
 /* Detalhamento */
 .resultado-detalhes {
-  background: var(--color-bg-hover);
+  background: #FFFFFF;  /* Branco puro */
   padding: var(--spacing-lg);
-  border-radius: var(--radius);
+  border-radius: var(--radius-md);
   margin-bottom: var(--spacing-lg);
+  border: 2px solid #E7E7E7;
 }
 
 .resultado-detalhes h4 {
   font-size: var(--font-size-lg);
   margin-bottom: var(--spacing-md);
-  color: var(--color-text);
+  color: #2C3E50;  /* Azul acinzentado */
+  font-weight: 700;
 }
 
 .detalhe-item {
   display: flex;
   justify-content: space-between;
-  padding: var(--spacing-md) 0;  /* MAIS padding */
-  border-bottom: 2px solid rgba(255, 255, 255, 0.15);  /* Borda GROSSA */
+  padding: var(--spacing-md);
+  background: #F9FAFB;
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--spacing-sm);
   font-weight: 600;
-  font-size: 1.125rem;  /* MAIOR */
-  color: #FFFFFF;  /* BRANCO */
+  font-size: 1.25rem;  /* 20px - Maior */
+  color: var(--color-text-dark);  /* Texto escuro em fundo claro */
+}
+
+.detalhe-item span:last-child {
+  color: #2C3E50;  /* Azul acinzentado */
+  font-weight: 700;
 }
 
 .detalhe-item-small {
   display: flex;
   justify-content: space-between;
-  padding: var(--spacing-sm) 0;
-  padding-left: var(--spacing-lg);
-  font-size: 1rem;  /* MAIOR */
-  color: #E7E7E7;  /* Cinza claro visível */
-  font-weight: 500;
+  padding: 8px 0; /* var(--spacing-xs) - Grid 8px */
+  padding-left: 24px; /* var(--spacing-md) */
+  font-family: 'DM Sans', sans-serif; /* Fonte secundária */
+  font-size: 1rem;  /* 16px - Maior */
+  color: var(--cinza); /* #666666 */
+  font-weight: 500;  /* Peso maior para melhor legibilidade */
 }
 
 .detalhe-item.lance {
-  background: rgba(209, 255, 0, 0.15);  /* Verde Vanguarda com transparência */
-  margin: var(--spacing-sm) calc(var(--spacing-lg) * -1);
-  padding: var(--spacing-sm) var(--spacing-lg);
-  border: none;
-  color: var(--color-text-dark);  /* Texto escuro legível */
-  border-left: 4px solid var(--color-primary);  /* Borda verde */
+  background: #FFFEF0;  /* Amarelo muito claro */
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-dark);  /* Texto escuro */
+  border: 3px solid #BDE70E;  /* Borda verde brilhante */
+}
+
+.detalhe-item.lance strong {
+  color: #7ED500;  /* Verde escuro para valor */
+  font-size: 1.5rem;  /* Maior - 24px */
 }
 
 /* Gráfico */
@@ -825,31 +966,48 @@ function formatarData(dataStr) {
   font-size: var(--font-size-lg);
   margin-bottom: var(--spacing-md);
   text-align: center;
-  color: var(--color-primary);  /* Verde Vanguarda para títulos */
+  color: #2C3E50;  /* Azul acinzentado */
+  font-weight: 700;
 }
 
 /* Resumo Total */
 .resultado-resumo {
-  border-top: 2px solid var(--color-border);
-  padding-top: var(--spacing-lg);
+  background: #FFFFFF;  /* Branco puro */
+  padding: var(--spacing-lg);
+  border-radius: var(--radius-md);
+  border: 3px solid #2C3E50;  /* Borda azul acinzentado */
+  margin-top: var(--spacing-lg);
 }
 
 .resumo-item {
   display: flex;
   justify-content: space-between;
-  padding: var(--spacing-sm) 0;
+  padding: var(--spacing-md);
+  color: var(--color-text-dark);  /* Texto escuro em card branco */
+  font-weight: 600;
+  background: #F9F9F9;
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--spacing-sm);
+}
+
+.resumo-item strong {
+  color: #2C3E50;  /* Azul acinzentado */
+  font-size: 1.25rem;
 }
 
 .resumo-item.total {
   font-size: var(--font-size-xl);
-  padding-top: var(--spacing-md);
-  border-top: 1px solid var(--color-border);
-  margin-top: var(--spacing-sm);
+  padding: var(--spacing-md);
+  background: #F0F7FF;  /* Fundo azul muito claro */
+  border-radius: var(--radius-sm);
+  margin-top: var(--spacing-md);
+  border: 2px solid #2C3E50;  /* Borda azul acinzentado */
 }
 
 .resumo-item.total strong {
-  color: var(--color-primary);
+  color: #2C3E50;  /* Azul acinzentado */
   font-size: var(--font-size-2xl);
+  font-weight: 900;
 }
 
 /* Modal Comparador */
@@ -882,11 +1040,12 @@ function formatarData(dataStr) {
   justify-content: space-between;
   align-items: center;
   padding: var(--spacing-lg);
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid #E7E7E7;  /* Cinza claro - branding */
 }
 
 .modal-header h3 {
   margin: 0;
+  color: var(--color-text-dark);  /* Texto escuro em modal branco */
 }
 
 .btn-close {
@@ -894,7 +1053,7 @@ function formatarData(dataStr) {
   border: none;
   font-size: 2rem;
   cursor: pointer;
-  color: var(--color-text-secondary);
+  color: #666666;  /* Cinza médio - branding */
   line-height: 1;
   padding: 0;
   width: 32px;
@@ -902,7 +1061,7 @@ function formatarData(dataStr) {
 }
 
 .btn-close:hover {
-  color: var(--color-text);
+  color: var(--color-text-dark);  /* Escuro no hover */
 }
 
 .modal-body {
@@ -918,16 +1077,17 @@ function formatarData(dataStr) {
 .comparacao-table td {
   padding: var(--spacing-md);
   text-align: left;
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid #E7E7E7;  /* Cinza claro - branding */
+  color: var(--color-text-dark);  /* Texto escuro */
 }
 
 .comparacao-table th {
-  background: var(--color-bg-hover);
+  background: #F5F5F5;  /* Cinza muito claro - branding */
   font-weight: 600;
 }
 
 .comparacao-table tr:hover {
-  background: var(--color-bg-hover);
+  background: #F5F5F5;  /* Cinza muito claro - branding */
 }
 
 .comparacao-table tr.atual {

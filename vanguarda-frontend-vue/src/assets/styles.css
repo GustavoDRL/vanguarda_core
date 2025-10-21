@@ -78,8 +78,8 @@
 
 body {
   font-family: var(--font-family);
-  font-size: 1.125rem;  /* 18px - MAIOR para melhor legibilidade */
-  line-height: 1.6;  /* Mais espaço entre linhas */
+  font-size: 1rem;  /* 16px - Base Branding Kit */
+  line-height: 1.6;
   color: var(--color-text);
   background-color: var(--color-bg);
   -webkit-font-smoothing: antialiased;
@@ -91,18 +91,20 @@ body {
   min-height: 100vh;
 }
 
-/* Typography - TAMANHOS MAIORES para legibilidade */
+/* Typography - Branding Kit */
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 700;  /* Mais peso para melhor visibilidade */
-  line-height: 1.3;
+  font-weight: 700;
+  line-height: 1.25;  /* Tight - Branding Kit */
   margin-bottom: var(--spacing-lg);
-  color: var(--color-text);
+  color: var(--color-text-dark);
 }
 
-h1 { font-size: 2.5rem; font-weight: 900; }  /* 40px */
-h2 { font-size: 2rem; font-weight: 800; }    /* 32px */
-h3 { font-size: 1.75rem; font-weight: 700; } /* 28px */
-h4 { font-size: 1.5rem; font-weight: 600; }  /* 24px */
+h1 { font-size: 3rem; font-weight: 900; }       /* 48px - Branding Kit */
+h2 { font-size: 2.25rem; font-weight: 700; }    /* 36px - Branding Kit */
+h3 { font-size: 1.875rem; font-weight: 600; }   /* 30px - Branding Kit */
+h4 { font-size: 1.5rem; font-weight: 600; }     /* 24px - Branding Kit */
+h5 { font-size: 1.25rem; font-weight: 600; }    /* 20px - Branding Kit */
+h6 { font-size: 1.125rem; font-weight: 600; }   /* 18px - Branding Kit */
 
 p {
   margin-bottom: var(--spacing-md);
@@ -116,56 +118,51 @@ p {
   padding: 0 var(--spacing-md);
 }
 
-/* Card - MÁXIMA LEGIBILIDADE */
+/* Card */
 .card {
   background: var(--color-bg-card);  /* Branco */
-  border-radius: var(--radius-lg);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);  /* Sombra mais visível */
-  padding: 2rem;  /* Mais espaço interno */
+  border-radius: var(--radius-md);  /* 12px - Branding Kit */
+  box-shadow: var(--shadow-sm);  /* Branding Kit */
+  padding: var(--spacing-lg);  /* 32px - Grid 8px */
   margin-bottom: var(--spacing-xl);
-  color: #1a1a1a;  /* Preto quase puro - MÁXIMO CONTRASTE */
-  transition: var(--transition);
-  border: 2px solid #f0f0f0;  /* Borda sutil para definição */
+  color: var(--color-text-dark);  /* #333333 */
+  overflow: hidden;
 }
 
-.card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-  border-color: var(--color-primary);  /* Borda verde no hover */
-}
+/* Hover removido para manter cards estáticos */
 
 .card-header {
-  margin-bottom: var(--spacing-xl);
-  padding-bottom: var(--spacing-lg);
-  border-bottom: 3px solid #e0e0e0;  /* Borda MAIS GROSSA e visível */
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid #E7E7E7;  /* Cinza claro - Branding */
 }
 
 .card-title {
-  font-size: 1.75rem;  /* 28px - MAIOR */
+  font-size: 1.75rem;  /* 28px ~ H3 */
   font-weight: 700;
   margin: 0;
-  color: var(--color-primary);  /* Verde Vanguarda - forte contraste */
+  color: #2C3E50;  /* Azul acinzentado */
   letter-spacing: -0.02em;
 }
 
 .card-body {
   padding: 0;
-  color: #1a1a1a;  /* Texto muito escuro */
-  font-size: 1.125rem;  /* 18px */
-  line-height: 1.7;  /* Mais espaçamento */
+  color: var(--color-text-dark);  /* #333333 */
+  font-size: 1rem;  /* 16px - Base */
+  line-height: 1.6;
 }
 
 .card-body p,
 .card-body li,
 .card-body span {
-  color: #1a1a1a;  /* Texto escuro consistente */
-  margin-bottom: 1rem;
+  color: var(--color-text-dark);
+  margin-bottom: var(--spacing-sm);
 }
 
 .card-footer {
-  margin-top: var(--spacing-xl);
-  padding-top: var(--spacing-lg);
-  border-top: 3px solid #e0e0e0;  /* Borda MAIS GROSSA */
+  margin-top: var(--spacing-lg);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid #E7E7E7;  /* Cinza claro - Branding */
 }
 
 /* Forms */
@@ -175,10 +172,10 @@ p {
 
 .form-label {
   display: block;
-  margin-bottom: var(--spacing-md);
-  font-weight: 600;  /* Mais peso */
-  font-size: 1.125rem;  /* 18px - MAIOR */
-  color: var(--color-text);  /* Branco no fundo escuro */
+  margin-bottom: var(--spacing-sm);  /* 16px - Grid 8px */
+  font-weight: 600;
+  font-size: 1rem;  /* 16px - Base */
+  color: var(--color-text-dark);  /* Texto escuro (cards brancos) */
   letter-spacing: 0.01em;
 }
 
@@ -191,14 +188,14 @@ p {
 .form-select,
 .form-textarea {
   width: 100%;
-  padding: 1rem 1.25rem;  /* MAIOR padding */
-  font-size: 1.125rem;  /* 18px - MAIOR */
-  line-height: 1.6;
-  color: #1a1a1a;  /* Texto muito escuro */
-  font-weight: 500;  /* Mais peso */
+  padding: 1rem;  /* 16px - Grid 8px */
+  font-size: 1rem;  /* 16px - Base */
+  line-height: 1.5;
+  color: var(--color-text-dark);  /* #333333 */
+  font-weight: 400;
   background-color: var(--color-bg-input);
-  border: 2px solid #d0d0d0;  /* Borda MAIS GROSSA */
-  border-radius: var(--radius-md);
+  border: 1px solid #CCCCCC;  /* Cinza médio - Branding */
+  border-radius: var(--radius-sm);  /* 8px - Branding Kit */
   transition: var(--transition);
 }
 
@@ -206,9 +203,8 @@ p {
 .form-select:focus,
 .form-textarea:focus {
   outline: none;
-  border-color: var(--color-primary);
-  border-width: 3px;  /* Borda ainda mais grossa no focus */
-  box-shadow: 0 0 0 4px rgba(209, 255, 0, 0.25);  /* Sombra verde MAIOR */
+  border-color: var(--color-primary);  /* Verde Vanguarda */
+  box-shadow: 0 0 0 3px rgba(209, 255, 0, 0.2);  /* Sombra verde */
 }
 
 .form-input:disabled,
@@ -249,18 +245,18 @@ p {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem 2rem;  /* MAIOR padding */
-  font-size: 1.125rem;  /* 18px - MAIOR */
-  font-weight: 700;  /* Mais peso */
+  padding: 0.875rem 2rem;  /* 14px 32px - Branding Kit */
+  font-size: 1rem;  /* 16px - Branding Kit */
+  font-weight: 600;  /* Semibold - Branding Kit */
   line-height: 1.5;
   text-align: center;
   text-decoration: none;
-  border: 2px solid transparent;  /* Borda mais grossa */
-  border-radius: var(--radius-md);
+  border: 2px solid transparent;
+  border-radius: var(--radius-sm);  /* 8px - Branding Kit */
   cursor: pointer;
   transition: var(--transition);
   gap: var(--spacing-sm);
-  letter-spacing: 0.02em;  /* Melhor espaçamento */
+  letter-spacing: 0.02em;
 }
 
 .btn:disabled {
@@ -308,23 +304,25 @@ p {
 }
 
 .btn-outline {
-  color: var(--color-primary);
-  background-color: transparent;
-  border-color: var(--color-primary);
+  color: #2C3E50;  /* Azul acinzentado para alto contraste */
+  background-color: #D1FF00;  /* Fundo verde característico sempre */
+  border: 3px solid #2C3E50;  /* Borda azul acinzentado */
+  font-weight: 600;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .btn-outline:hover:not(:disabled) {
-  color: white;
-  background-color: var(--color-primary);
+  transform: translateY(-2px);  /* Levanta o botão */
+  box-shadow: 0 4px 12px rgba(209, 255, 0, 0.4);  /* Sombra verde suave */
 }
 
 .btn-lg {
-  padding: 0.75rem 1.5rem;
+  padding: 1rem 1.5rem;  /* 16px 24px - Grid 8px */
   font-size: var(--font-size-lg);
 }
 
 .btn-sm {
-  padding: 0.375rem 0.75rem;
+  padding: 0.5rem 1rem;  /* 8px 16px - Grid 8px */
   font-size: var(--font-size-sm);
 }
 
