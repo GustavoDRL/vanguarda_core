@@ -1,0 +1,455 @@
+/**
+ * VANGUARDA CONSÓRCIOS - VARIÁVEIS CSS
+ * Sistema de Design Completo
+ * 
+ * Uso: Importe este arquivo em seu projeto HTML/CSS
+ * <link rel="stylesheet" href="variaveis-css.css">
+ */
+
+:root {
+    /* ========================================
+       CORES PRIMÁRIAS
+       ======================================== */
+    
+    --verde-primario: #D1FF00;
+    --verde-claro: #7ED500;
+    --verde-brilhante: #BDE70E;
+    
+    --azul-secundario: #2575FC;
+    --azul-escuro: #0C5ADB;
+    --azul-google: #4285F4;
+    
+    /* ========================================
+       CORES SECUNDÁRIAS
+       ======================================== */
+    
+    --verde-menta: #00E49A;
+    --verde-suave: #82E182;
+    --roxo: #9460FF;
+    
+    /* ========================================
+       CORES DE DESTAQUE
+       ======================================== */
+    
+    --coral: #FE8F75;
+    --rosa: #F2709C;
+    --rosa-intenso: #FF3984;
+    
+    /* ========================================
+       CORES NEUTRAS
+       ======================================== */
+    
+    --branco: #FFFFFF;
+    --cinza-muito-claro: #F5F5F5;
+    --cinza-muito-claro-2: #F4F4F4;
+    --cinza-muito-claro-3: #F2F2F5;
+    --cinza-claro: #E7E7E7;
+    --cinza-claro-2: #D7D7D7;
+    --cinza-medio: #CCCCCC;
+    --cinza: #666666;
+    --cinza-escuro: #333333;
+    --cinza-azulado-escuro: #2C3E50;
+    --cinza-azulado: #34495E;
+    --cinza-muito-escuro: #111111;
+    --cinza-muito-escuro-2: #101010;
+    --preto: #000000;
+    
+    /* Cor base de fundo padrão */
+    --fundo-base: #2C3E50;
+    
+    /* ========================================
+       GRADIENTES (USO OPCIONAL - PREFERIR CORES SÓLIDAS)
+       ======================================== */
+    
+    --gradiente-verde: linear-gradient(135deg, #D1FF00 0%, #7ED500 100%);
+    --gradiente-azul: linear-gradient(135deg, #2575FC 0%, #0C5ADB 100%);
+    --gradiente-escuro: linear-gradient(135deg, #2C3E50 0%, #34495E 100%);
+    --gradiente-rosa: linear-gradient(135deg, #F2709C 0%, #FF3984 100%);
+    --gradiente-coral: linear-gradient(135deg, #FE8F75 0%, #F2709C 100%);
+    --gradiente-menta: linear-gradient(135deg, #00E49A 0%, #82E182 100%);
+    
+    /* ========================================
+       TIPOGRAFIA
+       ======================================== */
+    
+    --font-primary: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-secondary: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-monospace: 'Courier New', Courier, monospace;
+    
+    /* Pesos de Fonte */
+    --font-thin: 100;
+    --font-extralight: 200;
+    --font-light: 300;
+    --font-regular: 400;
+    --font-medium: 500;
+    --font-semibold: 600;
+    --font-bold: 700;
+    --font-extrabold: 800;
+    --font-black: 900;
+    
+    /* Tamanhos de Fonte */
+    --font-size-xs: 0.75rem;      /* 12px */
+    --font-size-sm: 0.875rem;     /* 14px */
+    --font-size-base: 1rem;       /* 16px */
+    --font-size-lg: 1.125rem;     /* 18px */
+    --font-size-xl: 1.25rem;      /* 20px */
+    --font-size-2xl: 1.5rem;      /* 24px */
+    --font-size-3xl: 1.875rem;    /* 30px */
+    --font-size-4xl: 2.25rem;     /* 36px */
+    --font-size-5xl: 3rem;        /* 48px */
+    --font-size-6xl: 3.75rem;     /* 60px */
+    
+    /* Line Heights */
+    --line-height-none: 1;
+    --line-height-tight: 1.25;
+    --line-height-snug: 1.375;
+    --line-height-normal: 1.5;
+    --line-height-relaxed: 1.625;
+    --line-height-loose: 2;
+    
+    /* ========================================
+       ESPAÇAMENTO (Grid de 8px)
+       ======================================== */
+    
+    --spacing-xs: 8px;
+    --spacing-sm: 16px;
+    --spacing-md: 24px;
+    --spacing-lg: 32px;
+    --spacing-xl: 48px;
+    --spacing-xxl: 64px;
+    --spacing-3xl: 96px;
+    --spacing-4xl: 128px;
+    
+    /* ========================================
+       BORDER RADIUS
+       ======================================== */
+    
+    --radius-none: 0;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+    --radius-2xl: 32px;
+    --radius-full: 9999px;
+    
+    /* ========================================
+       SOMBRAS
+       ======================================== */
+    
+    --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.15);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.2);
+    --shadow-xl: 0 12px 48px rgba(0, 0, 0, 0.25);
+    --shadow-2xl: 0 24px 64px rgba(0, 0, 0, 0.3);
+    
+    /* Sombras Coloridas */
+    --shadow-primary: 0 8px 32px rgba(209, 255, 0, 0.3);
+    --shadow-secondary: 0 8px 32px rgba(37, 117, 252, 0.3);
+    
+    /* ========================================
+       TRANSIÇÕES
+       ======================================== */
+    
+    --transition-fast: 0.15s ease;
+    --transition-base: 0.3s ease;
+    --transition-slow: 0.5s ease;
+    
+    --transition-all: all 0.3s ease;
+    --transition-colors: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+    --transition-transform: transform 0.3s ease;
+    --transition-opacity: opacity 0.3s ease;
+    
+    /* ========================================
+       Z-INDEX
+       ======================================== */
+    
+    --z-dropdown: 1000;
+    --z-sticky: 1020;
+    --z-fixed: 1030;
+    --z-modal-backdrop: 1040;
+    --z-modal: 1050;
+    --z-popover: 1060;
+    --z-tooltip: 1070;
+    
+    /* ========================================
+       BREAKPOINTS (para uso em calc/clamp)
+       ======================================== */
+    
+    --breakpoint-sm: 640px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 1024px;
+    --breakpoint-xl: 1280px;
+    --breakpoint-2xl: 1536px;
+    
+    /* ========================================
+       LARGURAS DE CONTAINER
+       ======================================== */
+    
+    --container-sm: 640px;
+    --container-md: 768px;
+    --container-lg: 1024px;
+    --container-xl: 1280px;
+    --container-2xl: 1400px;
+    
+    /* ========================================
+       OPACIDADES
+       ======================================== */
+    
+    --opacity-0: 0;
+    --opacity-10: 0.1;
+    --opacity-20: 0.2;
+    --opacity-30: 0.3;
+    --opacity-40: 0.4;
+    --opacity-50: 0.5;
+    --opacity-60: 0.6;
+    --opacity-70: 0.7;
+    --opacity-80: 0.8;
+    --opacity-90: 0.9;
+    --opacity-100: 1;
+}
+
+/* ========================================
+   CLASSES UTILITÁRIAS
+   ======================================== */
+
+/* Cores de Texto */
+.text-primary { color: var(--verde-primario); }
+.text-secondary { color: var(--azul-secundario); }
+.text-white { color: var(--branco); }
+.text-dark { color: var(--cinza-escuro); }
+.text-muted { color: var(--cinza); }
+
+/* Cores de Fundo */
+.bg-primary { background-color: var(--verde-primario); }
+.bg-secondary { background-color: var(--azul-secundario); }
+.bg-white { background-color: var(--branco); }
+.bg-light { background-color: var(--cinza-muito-claro); }
+.bg-dark { background-color: var(--fundo-base); }
+
+/* Gradientes de Fundo (USO OPCIONAL) */
+.bg-gradient-verde { background: var(--gradiente-verde); }
+.bg-gradient-azul { background: var(--gradiente-azul); }
+.bg-gradient-escuro { background: var(--gradiente-escuro); }
+.bg-gradient-rosa { background: var(--gradiente-rosa); }
+
+/* Tipografia */
+.font-primary { font-family: var(--font-primary); }
+.font-secondary { font-family: var(--font-secondary); }
+
+.font-thin { font-weight: var(--font-thin); }
+.font-light { font-weight: var(--font-light); }
+.font-regular { font-weight: var(--font-regular); }
+.font-medium { font-weight: var(--font-medium); }
+.font-semibold { font-weight: var(--font-semibold); }
+.font-bold { font-weight: var(--font-bold); }
+.font-extrabold { font-weight: var(--font-extrabold); }
+.font-black { font-weight: var(--font-black); }
+
+/* Espaçamento */
+.p-xs { padding: var(--spacing-xs); }
+.p-sm { padding: var(--spacing-sm); }
+.p-md { padding: var(--spacing-md); }
+.p-lg { padding: var(--spacing-lg); }
+.p-xl { padding: var(--spacing-xl); }
+
+.m-xs { margin: var(--spacing-xs); }
+.m-sm { margin: var(--spacing-sm); }
+.m-md { margin: var(--spacing-md); }
+.m-lg { margin: var(--spacing-lg); }
+.m-xl { margin: var(--spacing-xl); }
+
+/* Border Radius */
+.rounded-sm { border-radius: var(--radius-sm); }
+.rounded-md { border-radius: var(--radius-md); }
+.rounded-lg { border-radius: var(--radius-lg); }
+.rounded-xl { border-radius: var(--radius-xl); }
+.rounded-full { border-radius: var(--radius-full); }
+
+/* Sombras */
+.shadow-sm { box-shadow: var(--shadow-sm); }
+.shadow-md { box-shadow: var(--shadow-md); }
+.shadow-lg { box-shadow: var(--shadow-lg); }
+.shadow-xl { box-shadow: var(--shadow-xl); }
+
+/* Transições */
+.transition-all { transition: var(--transition-all); }
+.transition-fast { transition: var(--transition-fast); }
+.transition-slow { transition: var(--transition-slow); }
+
+/* ========================================
+   COMPONENTES BASE
+   ======================================== */
+
+/* Reset e Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-normal);
+    color: var(--branco);
+    background-color: var(--fundo-base);
+}
+
+/* Títulos */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-primary);
+    font-weight: var(--font-bold);
+    line-height: var(--line-height-tight);
+    color: var(--branco);
+}
+
+h1 { font-size: var(--font-size-5xl); font-weight: var(--font-black); }
+h2 { font-size: var(--font-size-4xl); }
+h3 { font-size: var(--font-size-3xl); font-weight: var(--font-semibold); }
+h4 { font-size: var(--font-size-2xl); font-weight: var(--font-medium); }
+h5 { font-size: var(--font-size-xl); }
+h6 { font-size: var(--font-size-lg); }
+
+/* Links */
+a {
+    color: var(--verde-primario);
+    text-decoration: none;
+    transition: var(--transition-colors);
+}
+
+a:hover {
+    color: var(--verde-brilhante);
+}
+
+/* Botões */
+.btn {
+    display: inline-block;
+    padding: 14px 32px;
+    font-family: var(--font-primary);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-semibold);
+    text-align: center;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: var(--transition-all);
+}
+
+.btn-primary {
+    background-color: var(--verde-primario);
+    color: var(--cinza-escuro);
+}
+
+.btn-primary:hover {
+    background-color: var(--verde-brilhante);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-primary);
+}
+
+.btn-secondary {
+    background-color: var(--azul-secundario);
+    color: var(--branco);
+}
+
+.btn-secondary:hover {
+    background-color: var(--azul-escuro);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-secondary);
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: var(--verde-primario);
+    border: 2px solid var(--verde-primario);
+}
+
+.btn-outline:hover {
+    background-color: var(--verde-primario);
+    color: var(--cinza-escuro);
+}
+
+.btn-gradient {
+    background: var(--gradiente-verde);
+    color: var(--cinza-escuro);
+    border: none;
+}
+
+.btn-gradient:hover {
+    background: var(--gradiente-azul);
+    color: var(--branco);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Cards */
+.card {
+    background-color: var(--branco);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    transition: var(--transition-all);
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+}
+
+.card-header {
+    padding: var(--spacing-md);
+    background: var(--verde-primario);
+    color: var(--cinza-escuro);
+    font-weight: var(--font-semibold);
+}
+
+.card-body {
+    padding: var(--spacing-md);
+}
+
+/* Container */
+.container {
+    width: 100%;
+    max-width: var(--container-xl);
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+}
+
+/* Seção */
+.section {
+    padding: var(--spacing-xxl) 0;
+}
+
+.section-title {
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-bold);
+    color: var(--verde-primario);
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+}
+
+/* ========================================
+   RESPONSIVIDADE
+   ======================================== */
+
+@media (max-width: 768px) {
+    :root {
+        --font-size-5xl: 2rem;
+        --font-size-4xl: 1.75rem;
+        --font-size-3xl: 1.5rem;
+    }
+    
+    .btn {
+        padding: 12px 24px;
+        font-size: var(--font-size-sm);
+    }
+    
+    .section {
+        padding: var(--spacing-lg) 0;
+    }
+}
+
+/* ========================================
+   FIM DO ARQUIVO
+   ======================================== */
+
