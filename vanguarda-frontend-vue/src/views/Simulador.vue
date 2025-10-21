@@ -633,9 +633,9 @@ function formatarData(dataStr) {
 .indicador-cotas {
   margin-top: var(--spacing-md);
   padding: var(--spacing-md);
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+  background: rgba(37, 117, 252, 0.1);  /* Azul Vanguarda com transparência */
   border-radius: var(--radius);
-  border-left: 4px solid var(--color-primary);
+  border-left: 4px solid var(--color-secondary);  /* Borda azul */
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -647,11 +647,12 @@ function formatarData(dataStr) {
   align-items: center;
   gap: var(--spacing-xs);
   padding: var(--spacing-xs) var(--spacing-md);
-  background: var(--color-primary);
-  color: white;
+  background: var(--color-primary);  /* Verde Vanguarda */
+  color: var(--color-text-dark);  /* TEXTO ESCURO no verde! */
   border-radius: var(--radius-full);
   font-size: var(--font-size-sm);
   white-space: nowrap;
+  font-weight: 600;
 }
 
 .cotas-badge strong {
@@ -679,12 +680,13 @@ function formatarData(dataStr) {
 }
 
 .resultado-destaque {
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
-  color: white;
+  background: var(--color-secondary);  /* Azul sólido para contraste correto */
+  color: white;  /* Branco funciona bem no azul */
   padding: var(--spacing-xl);
   border-radius: var(--radius-lg);
   text-align: center;
   margin-bottom: var(--spacing-xl);
+  box-shadow: 0 8px 32px rgba(37, 117, 252, 0.3);
 }
 
 .resultado-label {
@@ -723,8 +725,8 @@ function formatarData(dataStr) {
 }
 
 .metrica-card.highlight {
-  background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(139, 92, 246, 0.2) 100%);
-  border: 2px solid rgba(139, 92, 246, 0.3);
+  background: rgba(209, 255, 0, 0.1);  /* Verde Vanguarda com transparência */
+  border: 2px solid var(--color-primary);  /* Borda verde */
 }
 
 .metrica-label {
@@ -772,11 +774,12 @@ function formatarData(dataStr) {
 }
 
 .detalhe-item.lance {
-  background: rgba(139, 92, 246, 0.1);
+  background: rgba(209, 255, 0, 0.15);  /* Verde Vanguarda com transparência */
   margin: var(--spacing-sm) calc(var(--spacing-lg) * -1);
   padding: var(--spacing-sm) var(--spacing-lg);
   border: none;
-  color: rgba(139, 92, 246, 1);
+  color: var(--color-text-dark);  /* Texto escuro legível */
+  border-left: 4px solid var(--color-primary);  /* Borda verde */
 }
 
 /* Gráfico */
@@ -785,13 +788,15 @@ function formatarData(dataStr) {
   padding: var(--spacing-lg);
   background: white;
   border-radius: var(--radius);
-  border: 1px solid var(--color-border);
+  border: 1px solid #e5e7eb;
+  color: var(--color-text-dark);  /* Texto escuro em fundo branco */
 }
 
 .grafico-section h4 {
   font-size: var(--font-size-lg);
   margin-bottom: var(--spacing-md);
   text-align: center;
+  color: var(--color-primary);  /* Verde Vanguarda para títulos */
 }
 
 /* Resumo Total */

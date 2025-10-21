@@ -114,37 +114,50 @@ p {
   padding: 0 var(--spacing-md);
 }
 
-/* Card */
+/* Card - REGRAS DE CONTRASTE VANGUARDA */
 .card {
-  background: var(--color-bg-card);
+  background: var(--color-bg-card);  /* Branco */
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow);
   padding: var(--spacing-xl);
   margin-bottom: var(--spacing-lg);
-  color: var(--color-text-dark);  /* Texto escuro em cards brancos */
+  color: var(--color-text-dark);  /* SEMPRE texto escuro em cards brancos */
+  transition: var(--transition);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
 }
 
 .card-header {
   margin-bottom: var(--spacing-lg);
   padding-bottom: var(--spacing-md);
-  border-bottom: 1px solid #e5e7eb;  /* Borda cinza clara para cards brancos */
+  border-bottom: 1px solid #e5e7eb;  /* Borda cinza clara */
 }
 
 .card-title {
   font-size: var(--font-size-xl);
   font-weight: 600;
   margin: 0;
-  color: var(--color-text-dark);
+  color: var(--color-primary);  /* Verde Vanguarda em títulos de cards */
 }
 
 .card-body {
   padding: 0;
+  color: var(--color-text-dark);  /* Texto escuro no body */
+}
+
+.card-body p,
+.card-body li,
+.card-body span {
+  color: var(--color-text-dark);  /* Força texto escuro em todos os elementos */
 }
 
 .card-footer {
   margin-top: var(--spacing-lg);
   padding-top: var(--spacing-md);
-  border-top: 1px solid var(--color-border);
+  border-top: 1px solid #e5e7eb;  /* Borda cinza clara */
 }
 
 /* Forms */
@@ -157,7 +170,7 @@ p {
   margin-bottom: var(--spacing-sm);
   font-weight: 500;
   font-size: var(--font-size-sm);
-  color: var(--color-text);
+  color: var(--color-text);  /* Branco no fundo escuro */
 }
 
 .form-label.required::after {
@@ -211,7 +224,7 @@ p {
   display: block;
   margin-top: var(--spacing-xs);
   font-size: var(--font-size-sm);
-  color: var(--color-text-secondary);
+  color: var(--color-text-secondary);  /* Cinza claro para legibilidade */
 }
 
 .form-row {
@@ -387,11 +400,14 @@ p {
 .text-right { text-align: right; }
 .text-left { text-align: left; }
 
-.text-primary { color: var(--color-primary); }
-.text-secondary { color: var(--color-text-secondary); }
+/* Cores de texto - contexto fundo escuro */
+.text-primary { color: var(--color-primary); }  /* Verde Vanguarda */
+.text-secondary { color: var(--color-text-secondary); }  /* Cinza claro */
 .text-muted { color: var(--color-text-muted); }
 .text-danger { color: var(--color-danger); }
-.text-success { color: var(--color-secondary); }
+.text-success { color: var(--color-secondary); }  /* Azul */
+.text-white { color: #FFFFFF; }  /* Branco para fundo escuro */
+.text-dark { color: var(--color-text-dark); }  /* Escuro para fundos claros */
 
 .text-xs { font-size: var(--font-size-xs); }
 .text-sm { font-size: var(--font-size-sm); }
